@@ -20,7 +20,10 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/index', [PostController::class, 'index'])->name('index');
+    Route::get('/posts', [PostController::class, 'index'])->name('posts');
+    Route::get('/posts/create', [PostController::class, 'create'])->name('postsCreate');
+    Route::post('/posts', [PostController::class, 'store']);
+    Route::get('/posts/{post}', [PostController::class, 'show'])->name('postsShow');
 });
 
 Route::get('/dashboard', function () {
