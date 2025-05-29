@@ -19,11 +19,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
+
+
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/posts', [PostController::class, 'index'])->name('posts');
     Route::get('/posts/create', [PostController::class, 'create'])->name('postsCreate');
+    Route::get('/posts/{post}/edit', [PostController::class, 'edit']);
+    Route::put('/posts/{post}', [PostController::class, 'update']);
     Route::post('/posts', [PostController::class, 'store']);
     Route::get('/posts/{post}', [PostController::class, 'show'])->name('postsShow');
+    //追加
+    Route::delete('/posts/{post}', [PostController::class, 'delete']);
 });
 
 Route::get('/dashboard', function () {
